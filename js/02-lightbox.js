@@ -19,8 +19,6 @@ galleryItems.forEach((galleryItem) => {
 
 gallery.append(...picArray);
 
-gallery.addEventListener("click", onClickGallery);
-
 new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionDelay: 250,
