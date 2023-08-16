@@ -21,6 +21,40 @@ galleryItems.forEach((galleryItem) => {
 });
 
 gallery.append(...picArray);
+
+gallery.addEventListener("click", clickGallery);
+function clickGallery(e) {
+  e.preventDefault();
+  if (!e.target.dataset.source) {
+    return;
+  }
+
+  const instance = basicLightbox.create(
+    `
+    <img src="${e.target.dataset.source}" width="800" height="600">
+  `,
+    {
+      onClose: () => {
+        document.removeEventListener("keydown", closeListener);
+      },
+    }
+  );
+
+  const closeListener = (event) => {
+    if (event.key === "Escape") {
+      instance.close();
+    }
+  };
+
+  instance.show();
+  document.addEventListener("keydown", closeListener);
+}
+console.log(galleryItems);
+
+
+
+
+
 ///>>>
 //Alternative: of adding to html file.
 ///<<<
@@ -36,30 +70,6 @@ gallery.append(...picArray);
 // gallery.insertAdjacentHTML("beforeend", galleryImages);
 //>>>
 
-gallery.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (!e.target.dataset.source) {
-    return;
-  }
-  const instance = basicLightbox.create(
-    `
-    <img src="${e.target.dataset.source}" width="800" height="600">
-`,
-    {
-      onShow: (instance) => {
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") {
-            instance.close();
-          }
-        });
-      },
-    }
-  );
-
-  instance.show();
-});
-
-console.log(galleryItems);
 
 //**
 // if (!e.target.dataset.source) //  if (!(url && description)) return;
