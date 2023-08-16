@@ -24,8 +24,4 @@ new SimpleLightbox(".gallery a", {
   captionDelay: 250,
 });
 
-function onClickGallery(e) {
-  e.preventDefault();
-}
-
 console.log(galleryItems);
